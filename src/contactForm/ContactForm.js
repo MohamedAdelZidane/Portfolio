@@ -1,13 +1,7 @@
 import { Row, Container } from 'react-bootstrap';
 import React, { Component } from "react";
-
-import axios from 'axios';
-
 import * as emailjs from 'emailjs-com';
-
-import { Form, Button, Modal } from 'react-bootstrap';
-import { ToastStore, toast } from 'react-toasts';
-import 'react-toastify/dist/ReactToastify.css';
+import { Form, Button } from 'react-bootstrap';
 class ContactForm extends Component {
     constructor(props) {
         super(props);
@@ -16,13 +10,11 @@ class ContactForm extends Component {
             message: "",
         };
     }
-
     handleInputChange(event) {
         event.preventDefault();
         const target = event.target;
         const name = target.name;
         const value = target.value;
-
         this.setState({ [name]: value });
     }
 
@@ -35,12 +27,9 @@ class ContactForm extends Component {
         };
         emailjs.send('gmail', 'portfolio', templateParams, 'user_z8hj9aO9eKy0NilRa9KRW')
             .then((resp) => {
-                // successCallback();
                 alert("Your message has been sent successfuly!")
-
                 console.log('SUCCESS!', resp.status, resp.text);
             }, (err) => {
-                // failureCallback();
                 console.log('FAILED...', err);
             });
         this.setState({
@@ -52,53 +41,43 @@ class ContactForm extends Component {
 
     render() {
         return (
-<Container id="contacts">
+            <Container id="contacts">
+                <h2 style={{ margin: "2rem 0 2rem 0" }}>Say Hello!</h2>
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control id="email"
+                            name="email"
+                            onChange={this.handleInputChange.bind(this)}
+                            placeholder="your email address"
 
-<h2 style={{margin: "2rem 0 2rem 0"}}>Say Hello!</h2>
+                            value={this.state.email}
 
-<Form>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control id="email"
-                                        name="email"
-                                        onChange={this.handleInputChange.bind(this)}
-                                        placeholder="your email address"
-                                        
-                                        value={this.state.email}
-                                       
-                                        rows={1}
-                                        type="email" required />
-   
-  </Form.Group>
+                            rows={1}
+                            type="email" required />
 
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Message</Form.Label>
-    <Form.Control as="textarea" rows="3"  id="message"
-                                        name="message"
-                                        onChange={this.handleInputChange.bind(this)}
-                                        placeholder="what would you like to chat about?"
-                                        
-                                        value={this.state.message}
-                                       
-                                         id="exampleFormControlTextarea1" rows="3" required/>
-  </Form.Group>
-  
-  <Button type="button"
-                                    value="Send"
-                                    
-                                    onClick={this.sendMessage.bind(this)} >
-    Submit
-  </Button>
-</Form>
+                    </Form.Group>
 
-</Container>
-       
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Message</Form.Label>
+                        <Form.Control as="textarea" rows="3" id="message"
+                            name="message"
+                            onChange={this.handleInputChange.bind(this)}
+                            placeholder="what would you like to chat about?"
 
-       
+                            value={this.state.message}
 
+                            id="exampleFormControlTextarea1" rows="3" required />
+                    </Form.Group>
 
+                    <Button type="button"
+                        value="Send"
 
-            
+                        onClick={this.sendMessage.bind(this)} >
+                        Submit
+                    </Button>
+                </Form>
+            </Container>
 
         );
     }
