@@ -1,6 +1,6 @@
 # Portfolio
-### Single page application to display my technical projects, and sending an email without any server-side technology using EmailJS.
-### Technology: HTML5/ CSS3 /Javascript /Bootstrap /ReactJS
+Single page application to display my technical projects, and sending an email without any server-side technology using EmailJS.
+Technology: HTML5/ CSS3 /Javascript /Bootstrap /ReactJS
 ## To run this project, install it locally then
 ### $ cd ../portfolio
 ### $ npm start
