@@ -25,18 +25,24 @@ class ContactForm extends Component {
             to_name: 'mohamed',
             feedback: this.state.feedback
         };
-        emailjs.send('gmail', 'portfolio', templateParams, 'user_z8hj9aO9eKy0NilRa9KRW')
-            .then((resp) => {
-                alert("Your message has been sent successfuly!")
-                console.log('SUCCESS!', resp.status, resp.text);
-            }, (err) => {
-                console.log('FAILED...', err);
+        if (this.state.email === "") {
+            alert("Please write your mail");
+        } else if (this.state.message === "") {
+            alert("Please write your message");
+        }
+        else {
+            emailjs.send('gmail', 'portfolio', templateParams, 'user_z8hj9aO9eKy0NilRa9KRW')
+                .then((resp) => {
+                    alert("Your message has been sent successfuly!")
+                    console.log('SUCCESS!', resp.status, resp.text);
+                }, (err) => {
+                    console.log('FAILED...', err);
+                });
+            this.setState({
+                email: "",
+                message: ""
             });
-        this.setState({
-            name: "",
-            email: "",
-            message: ""
-        });
+        }
     }
 
     render() {
